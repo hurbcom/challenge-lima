@@ -23,7 +23,7 @@ Você pode usar qualquer linguagem de programação para o desafio. Preferencial
 Você pode usar qualquer _framework_. Se a sua escolhar for por um _framework_ que resulte em _boilerplate code_, por favor descreva no README qual pedaço de código foi escrito por você.
 
 
-Pontos extras se você responder **qual é o menor número de drones para mapear completamnente uma área de 10mx10m**!
+Pontos extras se você responder no README.md **qual é o menor número de drones para mapear completamnente uma área de 10mx10m no menor número de passos possíveis**!
 
 ## Requisitos
 - Os drones não podem voar para fora da área delimitada inicialmente. Uma vez que eles encostem em alguma borda, seu único movimento é girar
