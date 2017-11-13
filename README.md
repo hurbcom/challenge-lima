@@ -12,6 +12,7 @@ Construa um programa de linha de comando que ao ser iniciado receberá como par�
 
 ex:
 <a href="https://asciinema.org/a/n3Ufy21fz6VavHPglju9h0rEZ" target="_blank"><img src="https://asciinema.org/a/n3Ufy21fz6VavHPglju9h0rEZ.png" /></a>
+Nesse exemplo, as coordenadas de inicalização do drone e para qual ponto cardeal ele deve estar apontado no início foi enviada juntamente com a sequência de comandos.
 
 Você pode usar qualquer linguagem de programação para o desafio. Preferencialmente esperamos que seja uma das linguagens abaixo:
 - JavaScript (NodeJS)
