@@ -1,5 +1,23 @@
 # <img src="https://avatars1.githubusercontent.com/u/7063040?v=4&s=200.jpg" alt="HU" width="24" /> Desafio Echo
 
+## Principais scripts do projeto [Editado por @matheusrabelo]
+`$ npm install` - para instalar todas as dependências
+
+`$ npm link` - para poder executar o projeto apenas com o comando `startGrid`
+
+`$ node cli.js 10x20` - para executar o projeto
+
+`$ startGrid 10x20` - para executar o projeto (após ter executado `npm link`)
+
+`$ npm run test` - para executar os testes
+
+`$ npm run coverage` - para gerar a descrição da cobertura dos testes na pasta /coverage
+
+## Testes [Editado por @matheusrabelo]
+[Cobertura dos testes](https://matheusrabelo.github.io/challenge-echo/coverage/)
+
+## Desafio
+
 Estamos desenvolvendo um produto que basicamente usa drones para mapear uma região e tirar fotos 360º e criar um mapa de navegável, muito parecido com o Google Street View. Então o desafio é criar uma ferramenta para controlar esses drones. 🚁
 
 Imagine que a região aonde os drones devem sobrevoar é um plano de X por Y metros e os drones só vão se locomover dentro desse plano de metro em metro (logo eles se locomovem em um grid) e a cada ponto de parada eles vão tirar uma foto 360º.
