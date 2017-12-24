@@ -1,8 +1,8 @@
 const saveInMemo = (memo, posX, posY) =>
-(memo[`${posX}x${posY}`] = true);
+    (memo[`${posX}x${posY}`] = true);
 
 const isInMemo = (memo, posX, posY) =>
-(memo[`${posX}x${posY}`] === true);
+    (memo[`${posX}x${posY}`] === true);
 
 const rotateRight = (facing) => {
 switch (facing) {
@@ -32,38 +32,38 @@ switch (facing) {
 };
 
 const getValidInstructions = (instructions) => {
-const lastF = instructions.lastIndexOf('F');
-if (lastF === -1) {
-    return '';
-}
-return instructions.substring(0, lastF + 1);
+    const lastF = instructions.lastIndexOf('F');
+    if (lastF === -1) {
+        return '';
+    }
+    return instructions.substring(0, lastF + 1);
 };
 
 const fly = (gridX, gridY, posX, posY, facing, instructions) => {
-let picturesTaken = 1;
-const memo = {};
-saveInMemo(memo, posX, posY);
-const validInstructions = getValidInstructions(instructions);
-validInstructions.split('').forEach(instruction => {
-    if (instruction === 'E') {
-        facing = rotateLeft(facing);
-    }
-    if (instruction === 'D') {
-        facing = rotateRight(facing);
-    }
-    if (instruction === 'F') {
-        const pos = getNextPos(posX, posY, facing);
-        if (pos.posX > 0 && pos.posX <= gridX &&
-            pos.posY > 0 && pos.posY <= gridY &&
-            !isInMemo(memo, pos.posX, pos.posY)) {
-            picturesTaken++;
-            posX = pos.posX;
-            posY = pos.posY;
-            saveInMemo(memo, posX, posY);
+    let picturesTaken = 1;
+    const memo = {};
+    saveInMemo(memo, posX, posY);
+    const validInstructions = getValidInstructions(instructions);
+    validInstructions.split('').forEach(instruction => {
+        if (instruction === 'E') {
+            facing = rotateLeft(facing);
         }
-    }
-});
-return { posX, posY, facing, picturesTaken };
+        if (instruction === 'D') {
+            facing = rotateRight(facing);
+        }
+        if (instruction === 'F') {
+            const pos = getNextPos(posX, posY, facing);
+            if (pos.posX > 0 && pos.posX <= gridX &&
+                pos.posY > 0 && pos.posY <= gridY &&
+                !isInMemo(memo, pos.posX, pos.posY)) {
+                picturesTaken++;
+                posX = pos.posX;
+                posY = pos.posY;
+                saveInMemo(memo, posX, posY);
+            }
+        }
+    });
+    return { posX, posY, facing, picturesTaken };
 };
 
 module.exports = { fly };
