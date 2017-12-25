@@ -1,0 +1,32 @@
+{
+  "name": "challenge-echo",
+  "version": "1.0.0",
+  "description": "challenge echo",
+  "main": "cli.js",
+  "bin": {
+    "startGrid": "cli.js"
+  },
+  "scripts": {
+    "test": "nyc mocha source/**/*.test.js --timeout=3000",
+    "coverage": "nyc --reporter=html --reporter=text npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matheusrabelo/challenge-echo.git"
+  },
+  "keywords": [
+    "challenge",
+    "echo"
+  ],
+  "author": "Matheus Freire Rabelo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matheusrabelo/challenge-echo/issues"
+  },
+  "homepage": "https://github.com/matheusrabelo/challenge-echo#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nyc": "^11.4.1"
+  }
+}

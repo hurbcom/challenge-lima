@@ -1,1 +1,3 @@
 startGrid
+node_modules/
+.nyc_output/
