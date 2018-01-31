@@ -6,13 +6,19 @@ module Echo
   class Drone
     attr_accessor :space, :x, :y, :orientation
 
-    def initialize(space, x = 1, y = 1, orientation = 'S')
+    def initialize(space, new_x = 1, new_y = 1, orientation = 'S')
       @space = space
-      @x = x
-      @y = y
+      @x = new_x.to_i
+      @y = new_y.to_i
       @orientation = orientation.to_s.upcase.strip
 
       validates!
+    end
+
+    def print
+      system "clear"
+      puts Echo::Helper.print(space, y, x, arrow)
+      sleep 1
     end
 
     def arrow
