@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require_relative "../lib/echo"
+
+begin
+  unless ARGV.first.nil?
+    interface = Echo::Interface.new(ARGV.first)
+    interface.start
+  else
+    puts %{#{Echo::Color.blue("Usage: bin/echo WxH")}
+  - ex.: bin/echo 10x10
+
+  - W -> width should be a value greater than 0
+  - H -> height should be a value greater than 0
+}
+  end
+rescue => e
+  puts e.message
+end
