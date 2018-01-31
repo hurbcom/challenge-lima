@@ -10,10 +10,10 @@ module Echo
     end
 
     def start
-      puts "Generated new Space with #{space.x}m by #{space.y}m."
+      puts Echo::Color.green("Generated new Space with #{space.x}m by #{space.y}m.")
       loop do
         print_menu_description
-        case STDIN.gets.chomp[0].downcase
+        case STDIN.gets.chomp[0].to_s.strip.downcase
         when 'n' then new_drone
         when 'p' then print_report
         when 'q' then print_report; break
@@ -26,7 +26,7 @@ module Echo
 
       def print_menu_description
         puts %{
-- Menu
+#{Echo::Color.blue("- Menu")}
  - h : help
  - n : new drone
  - p : print report
@@ -35,8 +35,9 @@ module Echo
       end
 
       def print_menu_drone
+        title = Echo::Color.blue("- Please insert position and orientation for Drone #{drones.size + 1}")
         puts %{
-- Please insert position and orientation for Drone #{drones.size + 1}.
+#{title}
  - ex.: 3 3 N
  - press enter to go menu
  - possible orientations:
@@ -68,7 +69,14 @@ module Echo
       end
 
       def move_drone(drone)
-        puts "Please insert movement sequence:"
+        title = Echo::Color.blue("Please insert movement sequence:")
+      puts %{
+#{title}
+ - ex.: DFFFEDF
+ - F -> go forward
+ - D -> go right and rotate 90 degress
+ - E -> go left and rotate -90 degress
+}
         sequence = STDIN.gets.chomp
         drone.print
         drone.move_sequence(sequence) do
@@ -77,10 +85,9 @@ module Echo
       end
 
       def print_report
-        puts ""
-        puts "Reports"
+        puts Echo::Color.blue("\nReports\n")
         drones.each_with_index do |drone, index|
-          puts "- Drone #{index+1}"
+          puts Echo::Color.green("- Drone #{index+1}")
           drone.report
           puts ""
         end
