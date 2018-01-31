@@ -3,7 +3,7 @@ module Echo
     attr_reader :space, :drones
 
     def initialize(dimentions)
-      x, y = dimentions.to_s.split("x")
+      x, y = dimentions.to_s.downcase.split("x")
       @space = Echo::Space.new(x, y)
       @drones = []
       ARGV.clear
