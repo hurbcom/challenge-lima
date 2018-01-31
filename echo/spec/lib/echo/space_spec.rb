@@ -1,9 +1,9 @@
 require_relative '../../spec_helper'
 
 describe Echo::Space do
-  context "#move" do
-    let(:space) { Echo::Space.new(10, 10) }
-    let(:drone) { Echo::Drone.new(space, 0, 0, 'S') }
-
+  context "#initialize" do
+    it "should not initialize with negative dimentions" do
+      expect { Echo::Space.new(-1, 10) }.to raise_error('x should grater than 0')
+    end
   end
 end

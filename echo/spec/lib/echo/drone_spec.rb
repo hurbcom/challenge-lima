@@ -6,21 +6,21 @@ describe Echo::Drone do
 
     it "should with default config" do
       drone = Echo::Drone.new(space)
-      expect( drone.x ).to eq(0)
-      expect( drone.y ).to eq(0)
+      expect( drone.x ).to eq(1)
+      expect( drone.y ).to eq(1)
       expect( drone.orientation ).to eq('S')
     end
 
     it "should raise exception when inicialize with x invalid" do
-      expect { Echo::Drone.new(space, 10) }.to raise_error('Initialize position is not permited of x')
+      expect { Echo::Drone.new(space, 11) }.to raise_error('Initialize position is not permited of x')
     end
 
     it "should raise exception when inicialize with y invalid" do
-      expect { Echo::Drone.new(space, 0, 10) }.to raise_error('Initialize position is not permited of y')
+      expect { Echo::Drone.new(space, 1, 11) }.to raise_error('Initialize position is not permited of y')
     end
 
     it "should raise exception when inicialize with orientation invalid" do
-      expect { Echo::Drone.new(space, 0, 0, 'D') }.to raise_error('Initialize orientation is not permited')
+      expect { Echo::Drone.new(space, 1, 1, 'D') }.to raise_error('Initialize orientation is not permited')
     end
   end
 
@@ -50,7 +50,7 @@ describe Echo::Drone do
         expect(drone.y).to eq(7)
 
         drone.front(10)
-        expect(drone.y).to eq(9)
+        expect(drone.y).to eq(10)
       end
 
       it "back" do
@@ -58,7 +58,7 @@ describe Echo::Drone do
         expect(drone.y).to eq(3)
 
         drone.back(10)
-        expect(drone.y).to eq(0)
+        expect(drone.y).to eq(1)
       end
 
       it "right" do
@@ -66,7 +66,7 @@ describe Echo::Drone do
         expect(drone.x).to eq(3)
 
         drone.right(10)
-        expect(drone.x).to eq(0)
+        expect(drone.x).to eq(1)
       end
 
       it "left" do
@@ -74,7 +74,7 @@ describe Echo::Drone do
         expect(drone.x).to eq(7)
 
         drone.left(10)
-        expect(drone.x).to eq(9)
+        expect(drone.x).to eq(10)
       end
     end
 
@@ -158,9 +158,9 @@ describe Echo::Drone do
     it "should move correct sequence" do
       drone.move_sequence('DFFEEFDFE')
 
-      expect( drone.orientation ).to eq('O')
-      expect( drone.y ).to eq(5)
-      expect( drone.x ).to eq(2)
+      expect( drone.orientation ).to eq('L')
+      expect( drone.y ).to eq(8)
+      expect( drone.x ).to eq(5)
     end
   end
 end

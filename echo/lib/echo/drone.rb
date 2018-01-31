@@ -4,9 +4,9 @@
 # L -> Direita
 module Echo
   class Drone
-    attr_accessor :x, :y, :orientation
+    attr_accessor :space, :x, :y, :orientation
 
-    def initialize(space, x = 0, y = 0, orientation = 'S')
+    def initialize(space, x = 1, y = 1, orientation = 'S')
       @space = space
       @x = x
       @y = y
@@ -33,7 +33,7 @@ module Echo
             rotate
           when 'E' then
             left(1)
-            rotate
+            rotate_inverse
           when 'F' then front(1)
         end
         yield if block_given?
@@ -46,6 +46,15 @@ module Echo
         when 'L' then @orientation = 'S'
         when 'S' then @orientation = 'O'
         when 'O' then @orientation = 'N'
+      end
+    end
+
+    def rotate_inverse
+      case @orientation
+        when 'N' then @orientation = 'O'
+        when 'L' then @orientation = 'N'
+        when 'S' then @orientation = 'L'
+        when 'O' then @orientation = 'S'
       end
     end
 
@@ -89,17 +98,17 @@ module Echo
 
     def move_y(n, positive = true)
       if positive
-        @y = [ @y + n, @space.y - 1 ].min
+        @y = [ @y + n, space.y ].min
       else
-        @y = [ @y - n, 0 ].max
+        @y = [ @y - n, space.miny ].max
       end
     end
 
     def move_x(n, positive = true)
       if positive
-        @x = [ @x + n, @space.x - 1 ].min
+        @x = [ @x + n, space.x ].min
       else
-        @x = [ @x - n, 0 ].max
+        @x = [ @x - n, space.minx ].max
       end
     end
 
@@ -110,11 +119,11 @@ module Echo
     end
 
     def validates_x!
-      raise StandardError.new("Initialize position is not permited of x") unless x >= 0 && x < @space.x
+      raise StandardError.new("Initialize position is not permited of x") unless space.permit_x?(x)
     end
 
     def validates_y!
-      raise StandardError.new("Initialize position is not permited of y") unless y >= 0 && y < @space.y
+      raise StandardError.new("Initialize position is not permited of y") unless space.permit_y?(y)
     end
 
     def validates_orientation!
