@@ -3,7 +3,7 @@ module Echo
     attr_reader :space, :drones
 
     def initialize(dimentions)
-      x, y = dimentions.split("x")
+      x, y = dimentions.to_s.split("x")
       @space = Echo::Space.new(x, y)
       @drones = []
       ARGV.clear
@@ -11,37 +11,46 @@ module Echo
 
     def start
       puts "Generated new Space with #{space.x}m by #{space.y}m."
-      puts ""
-      menu
+      loop do
+        print_menu_description
+        case STDIN.gets.chomp[0].downcase
+        when 'n' then new_drone
+        when 'p' then print_report
+        when 'q' then print_report; break
+        when ''  then print_report; break
+        end
+      end
     end
 
     private
 
-      def menu
-        loop do
-          puts "Menu"
-          puts "  \"h\" for help"
-          puts "  \"n\" for new drone"
-          puts "  \"p\" for print report"
-          puts "  \"q\" for exit"
-          case STDIN.gets.chomp[0].downcase
-          when 'n' then new_drone
-          when 'p' then print_report
-          when 'q' then
-            print_report
-            break
-          end
-        end
+      def print_menu_description
+        puts %{
+- Menu
+ - h : help
+ - n : new drone
+ - p : print report
+ - q : exit
+}
+      end
+
+      def print_menu_drone
+        puts %{
+- Please insert position and orientation for Drone #{drones.size + 1}.
+ - ex.: 3 3 N
+ - press enter to go menu
+ - possible orientations:
+   - N -> North
+   - S -> South
+   - O -> West
+   - L -> East
+}
       end
 
       def new_drone
         loop do
-          puts "Drone #{drones.size + 1}"
-          puts "Please insert position and orientation."
-          puts "  ex.: 3 3 N"
-          puts "  possible orientations:\n\tN -> North, S -> South, O -> West and L -> East"
-          params = STDIN.gets.chomp
-          arguments = params.split("").compact[0..2]
+          print_menu_drone
+          arguments = STDIN.gets.chomp.split(/[\s\;\,\-\t]+/).compact[0..2]
 
           break if arguments.empty?
 
@@ -52,7 +61,7 @@ module Echo
             break
           rescue => e
             puts ""
-            puts e.message
+            puts "Error: #{e.message}"
             puts ""
           end
         end
@@ -68,14 +77,14 @@ module Echo
       end
 
       def print_report
-        puts "print_report"
+        puts ""
+        puts "Reports"
+        drones.each_with_index do |drone, index|
+          puts "- Drone #{index+1}"
+          drone.report
+          puts ""
+        end
+        puts ""
       end
-
-      # def readline
-      #   line = nil
-      #   while line = gets("\n")
-      #     puts line
-      #   end
-      # end
   end
 end

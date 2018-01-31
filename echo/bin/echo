@@ -2,19 +2,9 @@
 require_relative "../lib/echo"
 require 'byebug'
 
-interface = Echo::Interface.new(ARGV.first)
-interface.start
-
-# space = Echo::Space.new(10, 10)
-# # puts Echo::Helper.print(space, 5, 5, '%')
-
-# drone = Echo::Drone.new(space, 5, 5)
-# system "clear"
-# print Echo::Helper.print(space, drone.y, drone.x, drone.arrow) + "\r"
-# sleep 1
-
-# drone.move_sequence('DFFEEFDFE') do
-#   system "clear"
-#   print Echo::Helper.print(space, drone.y, drone.x, drone.arrow) + "\r"
-#   sleep 1
-# end
+begin
+  interface = Echo::Interface.new(ARGV.first)
+  interface.start
+rescue => e
+  puts e.message
+end

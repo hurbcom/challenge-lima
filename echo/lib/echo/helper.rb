@@ -3,13 +3,14 @@ module Echo
     def self.print(space, x, y, char)
       matrix = []
 
+      matrix << ""
       matrix << "   #{'N'.rjust(space.y*4/2, ' ')}"
-      matrix << "   #{(0..(space.y-1)).map { |d| d.to_s.rjust(3, ' ')  }.join(" ")}"
+      matrix << "   #{(1..(space.y)).map { |d| d.to_s.rjust(3, ' ')  }.join(" ")}"
       matrix << "    +#{'---+'*space.y}"
 
-      (0..(space.x-1)).to_a.each do |nx|
+      (1..(space.x)).to_a.each do |nx|
 
-        line = (0..(space.y-1)).to_a.map do |ny|
+        line = (1..(space.y)).to_a.map do |ny|
           if nx == x && ny == y
             " #{char} "
           else

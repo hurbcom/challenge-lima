@@ -4,13 +4,14 @@
 # L -> Direita
 module Echo
   class Drone
-    attr_accessor :space, :x, :y, :orientation
+    attr_accessor :space, :x, :y, :orientation, :pictures
 
     def initialize(space, new_x = 1, new_y = 1, orientation = 'S')
       @space = space
       @x = new_x.to_i
       @y = new_y.to_i
       @orientation = orientation.to_s.upcase.strip
+      @pictures = []
 
       validates!
     end
@@ -19,6 +20,12 @@ module Echo
       system "clear"
       puts Echo::Helper.print(space, y, x, arrow)
       sleep 1
+    end
+
+    def report
+      puts " - photos taken: #{pictures.size}"
+      puts " - position: x: #{x} y: #{y}"
+      puts " - orientation: x: #{x} y: #{y}"
     end
 
     def arrow
@@ -37,13 +44,19 @@ module Echo
           when 'D' then
             right(1)
             rotate
+            take_photo
           when 'E' then
             left(1)
             rotate_inverse
+            take_photo
           when 'F' then front(1)
         end
         yield if block_given?
       end
+    end
+
+    def take_photo
+      @pictures << { x: x, y: x, orientation: orientation }
     end
 
     def rotate
