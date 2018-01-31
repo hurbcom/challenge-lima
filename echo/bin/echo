@@ -4,3 +4,5 @@ require_relative "../lib/echo"
 puts "Wellcome to HU echo challenge"
 puts "version: #{Echo.version}"
 puts ""
+
+puts Echo::Space.new(10, 10).to_s
