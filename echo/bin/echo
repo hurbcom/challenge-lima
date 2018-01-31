@@ -5,4 +5,16 @@ puts "Wellcome to HU echo challenge"
 puts "version: #{Echo.version}"
 puts ""
 
-puts Echo::Space.new(10, 10).to_s
+space = Echo::Space.new(10, 10)
+# puts Echo::Helper.print(space, 5, 5, '%')
+
+drone = Echo::Drone.new(space, 5, 5)
+system "clear"
+print Echo::Helper.print(space, drone.y, drone.x, drone.arrow) + "\r"
+sleep 1
+
+drone.move_sequence('DFFEEFDFE') do
+  system "clear"
+  print Echo::Helper.print(space, drone.y, drone.x, drone.arrow) + "\r"
+  sleep 1
+end

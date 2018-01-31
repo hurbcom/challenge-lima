@@ -15,16 +15,25 @@ module Echo
       validates!
     end
 
+    def arrow
+      case @orientation
+        when 'N' then "↑"
+        when 'L' then "→"
+        when 'S' then "↓"
+        when 'O' then "←"
+      end
+    end
+
     def move_sequence(sequence)
       commands = sequence.to_s.split('')
       commands.each do |command|
         case command.to_s.upcase.strip
           when 'D' then
-            rotate
             right(1)
-          when 'E' then
             rotate
+          when 'E' then
             left(1)
+            rotate
           when 'F' then front(1)
         end
         yield if block_given?
@@ -33,10 +42,10 @@ module Echo
 
     def rotate
       case @orientation
-        when 'S' then @orientation = 'L'
-        when 'L' then @orientation = 'N'
-        when 'N' then @orientation = 'O'
-        when 'O' then @orientation = 'S'
+        when 'N' then @orientation = 'L'
+        when 'L' then @orientation = 'S'
+        when 'S' then @orientation = 'O'
+        when 'O' then @orientation = 'N'
       end
     end
 

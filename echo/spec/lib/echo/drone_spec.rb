@@ -31,11 +31,11 @@ describe Echo::Drone do
     it "should rotate correct drone" do
       expect( drone.orientation ).to eq('S')
       drone.rotate
-      expect( drone.orientation ).to eq('L')
+      expect( drone.orientation ).to eq('O')
       drone.rotate
       expect( drone.orientation ).to eq('N')
       drone.rotate
-      expect( drone.orientation ).to eq('O')
+      expect( drone.orientation ).to eq('L')
     end
   end
 
@@ -158,9 +158,9 @@ describe Echo::Drone do
     it "should move correct sequence" do
       drone.move_sequence('DFFEEFDFE')
 
-      expect( drone.orientation ).to eq('L')
-      expect( drone.y ).to eq(7)
-      expect( drone.x ).to eq(4)
+      expect( drone.orientation ).to eq('O')
+      expect( drone.y ).to eq(5)
+      expect( drone.x ).to eq(2)
     end
   end
 end
