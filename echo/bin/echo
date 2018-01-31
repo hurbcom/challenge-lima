@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require_relative "../lib/echo"
+
+puts "Wellcome to HU echo challenge"
+puts "version: #{Echo.version}"
+puts ""
