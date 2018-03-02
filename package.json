@@ -1,0 +1,19 @@
+{
+  "name": "challenge-echo",
+  "version": "1.0.0",
+  "description": "Challenge Echo for Hotel Urbano",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maypimentel/challenge-echo.git"
+  },
+  "author": "Maycon Pimentel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maypimentel/challenge-echo/issues"
+  },
+  "homepage": "https://github.com/maypimentel/challenge-echo#readme"
+}
