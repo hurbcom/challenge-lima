@@ -14,49 +14,17 @@ ex:
 <a href="https://asciinema.org/a/n3Ufy21fz6VavHPglju9h0rEZ" target="_blank"><img src="https://asciinema.org/a/n3Ufy21fz6VavHPglju9h0rEZ.png" /></a>
 Nesse exemplo, as coordenadas de inicalização do drone e para qual ponto cardeal ele deve estar apontado no início foi enviada juntamente com a sequência de comandos.
 
-Você pode usar qualquer linguagem de programação para o desafio. Preferencialmente esperamos que seja uma das linguagens abaixo:
-- JavaScript (NodeJS)
-- Go
-- Kotlin
-- Scala
-- C++
+## Liguagem
+- Dentre as linguagens sugeridas, foi escolhido o NodeJS devido a conhecimento prévio da linguagem.
+## Como executar
+- Requisito: Docker
+- Executando:
+  - git clone https://github.com/maypimentel/challenge-echo.git
+  - cd challenge-echo
+  - ./run.sh *xx*X*yy*
 
-Você pode usar qualquer _framework_. Se a sua escolhar for por um _framework_ que resulte em _boilerplate code_, por favor descreva no README qual pedaço de código foi escrito por você.
-
-
-Pontos extras se você responder no README.md **qual é o menor número de drones para mapear completamnente um grid de 10x10 metros com o menor número de passos possíveis**!
-
-## Requisitos
-- Os drones não podem voar para fora da área delimitada inicialmente. Uma vez que eles encostem em alguma borda, seu único movimento é girar
-- Não será tirada uma foto se o drone passar pela/ficar no mesmo ponto mais de uma vez
-- Não é possível iniciar dois drones na mesma coordenada cartesiana
-- Forkar esse desafio e criar o seu projeto (ou workspace) usando a sua versão desse repositório, tão logo acabe o desafio, submeta um *pull request*.
-- O código precisa rodar dentro de um container Docker
-- Para executar seu código, deve ser preciso apenas rodar os seguintes comandos:
-  - git clone $seu-fork
-  - cd $seu-fork
-  - comando para instalar dependências
-  - comando para executar a aplicação
-
-
-
-## Critério de avaliação
-
-- **Organização do código**: Separação de módulos, view e model, back-end e front-end
-- **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-- **Acertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-- **Legibilidade do código** (incluindo comentários)
-- **Segurança**: Existe alguma vulnerabilidade clara?
-- **Cobertura de testes** (Não esperamos cobertura completa)
-- **Histórico de commits** (estrutura e qualidade)
-- **UX**: As chamadas de coordenadas para os drones são intuítivas
-- **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
-
-## Dúvidas
-
-Quaisquer dúvidas que você venha a ter, consulte as [_issues_](https://github.com/HotelUrbano/challenge-echo/issues) para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-Boa sorte e boa viagem! ;)
+## Bônus
+- Ao final, poderá ser impresso o grid com as marcações de onde os drones obtiveram as fotografias.
 
 <p align="center">
   <img src="ca.jpg" alt="Challange accepted" />
