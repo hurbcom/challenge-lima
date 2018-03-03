@@ -9,5 +9,7 @@ grid.map = drone.move();
 drone.turn('D');
 grid.map = drone.move();
 
-console.log('X:'+drone.x+', Y:'+drone.y+', face_camera:'+drone.orientation + ', fotos:'+drone.fotos);
+console.log('X:'+drone.x+', Y:'+drone.y+', face_camera:'+drone.orientation + ', fotos:'+drone.photos);
 console.log(grid.map);
+console.log(commands.partitionGrid('10X10'));
+console.log(commands.partition('0315ODFFEEDE'));
