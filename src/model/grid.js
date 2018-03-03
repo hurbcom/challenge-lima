@@ -1,9 +1,9 @@
 class Monitor {
-    constructor(map = [10,10]) {
+    constructor(mapRange = [10,10]) {
         this._map = [];
-        for (var x = 0; x <= map[0]; x++) {
+        for (var x = 0; x <= mapRange[0]; x++) {
             var columns = [];
-            for (var y = 0; y <= map[1]; y++) {
+            for (var y = 0; y <= mapRange[1]; y++) {
                 columns[y] = 0;
             }
             this._map[x] = columns;
@@ -12,8 +12,8 @@ class Monitor {
     get map() {
         return this._map;
     }
-    set map ( map = [1,1,1]) {
-        this._map[map[1]][map[2]] = map[0];
+    set map ( mapRange = [1,1,1]) {
+        this._map[mapRange[1]][mapRange[2]] = mapRange[0];
     }
 }
 
