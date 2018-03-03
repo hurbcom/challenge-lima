@@ -32,6 +32,7 @@ var commandStr,
 do {
     repeat = true;
     try {
+        // Get command from User
         commandStr = readlineSync.question(util.format('Please inform the command sequence for drone %d or leave empty to exit : ', droneCount));
     } catch (e) {
         console.error(e);
@@ -45,11 +46,13 @@ do {
                 drone = new Drone(droneCount, droneUtils.X, droneUtils.Y, droneUtils.orientation, [gridRange.X,gridRange.Y]);
                 grid.map = [droneCount+'i', droneUtils.X, droneUtils.Y];
                 console.log(util.format('- Drone initiated at position [%d, %d] facing "%s" with sequence "%s"', droneUtils.X, droneUtils.Y, drone.face, droneUtils.commands));
+                // Pass to drone one per one command
                 for (var i = 0, len = droneUtils.commands.length; i < len; i++) {
                     position = drone.move(droneUtils.commands[i]);
                     (position)?grid.map = position:null;
                 }
                 droneCount++;
+                // Save information for reporting
                 dronesArr.push({
                     'droneId': drone.id, 
                     'finalPosition': {'X':drone.x, 'Y': drone.y},
@@ -69,12 +72,15 @@ do {
     } else {
         console.log('...exiting \n\n');
         repeat = false;
+        // Print report saved on previus array
         for (var i = 0, len = dronesArr.length; i < len; i++) {
             report(dronesArr[i].droneId, dronesArr[i].finalPosition, dronesArr[i].direction, dronesArr[i].photos);
         }
     };
 }
 while (repeat);
+
+// offer to user the option to print the grid
 if (readlineSync.keyInYN('Do you want to print GRID?')) {
     console.log(grid.map);
 }
