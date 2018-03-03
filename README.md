@@ -21,7 +21,7 @@ Nesse exemplo, as coordenadas de inicalização do drone e para qual ponto carde
 - Executando:
   - git clone https://github.com/maypimentel/challenge-echo.git
   - cd challenge-echo
-  - ./run.sh __xx__X__yy__
+  - ./run.sh __xxXyy__
 
 ## Bônus
 - Ao final, poderá ser impresso o grid com as marcações de onde os drones obtiveram as fotografias.
