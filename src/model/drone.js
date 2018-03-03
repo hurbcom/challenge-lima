@@ -5,7 +5,7 @@ class Drone {
         this._y = y;
         this._orientation = orientation;
         // Array of coordenates from taken pictures
-        this._photos = [];
+        this._photos = [[x,y]];
         this._mapRange = mapRange;
         // Directions based on commands 'D' and 'E' for orientation
         this._directions = {

@@ -44,7 +44,6 @@ do {
             // Verify if coordinates is free or init by another drone 
             if (grid.can_init([droneUtils.X, droneUtils.Y])) {
                 drone = new Drone(droneCount, droneUtils.X, droneUtils.Y, droneUtils.orientation, [gridRange.X,gridRange.Y]);
-                drone.take_photo();
                 grid.map = [droneCount+'i', droneUtils.X, droneUtils.Y];
                 console.log(util.format('- Drone initiated at position [%d, %d] facing "%s" with sequence "%s"', droneUtils.X, droneUtils.Y, drone.face, droneUtils.commands));
                 for (var i = 0, len = droneUtils.commands.length; i < len; i++) {

@@ -25,6 +25,8 @@ Nesse exemplo, as coordenadas de inicalização do drone e para qual ponto carde
 
 ## Bônus
 - Ao final, poderá ser impresso o grid com as marcações de onde os drones obtiveram as fotografias.
+- Teste unitátio:
+  - $> npm test
 
 <p align="center">
   <img src="ca.jpg" alt="Challange accepted" />
