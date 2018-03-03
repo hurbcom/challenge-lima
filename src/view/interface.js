@@ -26,7 +26,6 @@ function report(droneId, finalPosition=[1,1], direction, photos) {
     console.log(util.format('  - Pictures taken: %d \n', photos));
 };
 
-// var prompts = readline.createInterface(process.stdin, process.stdout);
 var commandStr,
     droneCount = 1,
     dronesArr = [];

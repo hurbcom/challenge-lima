@@ -21,13 +21,15 @@ Nesse exemplo, as coordenadas de inicalização do drone e para qual ponto carde
 - Executando:
   - git clone https://github.com/maypimentel/challenge-echo.git
   - cd challenge-echo
-  - ./run.sh *xx*X*yy*
+  - ./run.sh __xx__X__yy__
 
 ## Bônus
 - Ao final, poderá ser impresso o grid com as marcações de onde os drones obtiveram as fotografias.
 - Teste unitátio:
-  - $> npm test
+  ```bash
+    $> npm test
+  ``` 
 
 <p align="center">
-  <img src="ca.jpg" alt="Challange accepted" />
+  <img src="challenge_done.png" alt="Challange done" />
 </p>
