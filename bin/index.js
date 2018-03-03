@@ -1,15 +1,10 @@
-const DroneController = require('../src/controller/droneController.js')
-const Commands1 = require('../src/controller/commands.js')
-const Grid = require('../src/model/grid.js')
-grid = new Grid([10,10]);
-drone = new DroneController(1,5,3,'L',[10,10]);
-var commands = new Commands1;
-grid.map = [1+'i',5,3];
-grid.map = drone.move();
-drone.turn('D');
-grid.map = drone.move();
+const Grid = require('../src/controller/gridController.js');
+grid = new Grid([3,5]);
 
-console.log('X:'+drone.x+', Y:'+drone.y+', face_camera:'+drone.orientation + ', fotos:'+drone.photos);
+grid.map = [1+'i',5,5];
+grid.map = [1,6,5];
+grid.map = [1,7,5];
+grid.map = [1,7,4];
+grid.map = [1,8,4];
+
 console.log(grid.map);
-console.log(commands.partitionGrid('10X10'));
-console.log(commands.partition('0315ODFFEEDE'));

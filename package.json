@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/maypimentel/challenge-echo/issues"
   },
-  "homepage": "https://github.com/maypimentel/challenge-echo#readme"
+  "homepage": "https://github.com/maypimentel/challenge-echo#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.9",
+    "util": "^0.10.3"
+  }
 }

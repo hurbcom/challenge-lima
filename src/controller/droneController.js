@@ -33,24 +33,41 @@ class DroneController extends Drone {
         this._orientation = orientation;
     }
 
-    set photos(foto) {
-        this._photos = this.photos + foto;
+    set photos(coord = []) {
+        this._photos.push(coord);
     }
+    get face() {
+        return this._directions[this.orientation]['name'];
+    }
+
+    //Verify next step in de grid range
     can_move() {
         var x = this._x + this._paces[this.orientation]['X'];
         var y = this._y + this._paces[this.orientation]['Y'];
-        return (x >= 0 && x <= this._mapRange[0] && y >= 0 && y <= this._mapRange[1]);
+        return (x > 0 && x <= this._mapRange[0] && y > 0 && y <= this._mapRange[1]);
     }
 
-    move() {
-        if (this.can_move()) {
+    //Move only forward with orientation based
+    move(command) {
+        if (this.can_move() && command === 'F') {
             this.x = this._x + this._paces[this.orientation]['X'];
             this.y = this._y + this._paces[this.orientation]['Y'];
-            this.photos = 1;
+            this.take_photo();
+            return [this.id, this.x, this.y];
+        } 
+        if (command === 'D' || command === 'E'){
+            this.turn(command);
+            return null;
         }
-        return [this.id, this.x, this.y];
     };
+
+    take_photo(){
+        if(JSON.stringify(this.photos).indexOf(JSON.stringify([this.x, this.y])) == -1){
+            this.photos = [this.x, this.y];
+        }
+    }
     
+    // Turn 90° to Left (E) or Rigth (D) with orientation based 
     turn(direction) {
         this.orientation = this._directions[this.orientation][direction];
     };
