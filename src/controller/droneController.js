@@ -44,7 +44,7 @@ class DroneController extends Drone {
     can_move() {
         var x = this._x + this._paces[this.orientation]['X'];
         var y = this._y + this._paces[this.orientation]['Y'];
-        return (x >= 0 && x <= this._mapRange[0]-1 && y >= 0 && y <= this._mapRange[1]-1);
+        return (x > 0 && x <= this._mapRange[0] && y > 0 && y <= this._mapRange[1]);
     }
 
     //Move only forward with orientation based
