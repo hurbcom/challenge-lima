@@ -1,5 +1,6 @@
 class Grid {
     constructor(mapRange = [1,1]) {
+        this._mapRange = [mapRange[0]-1, mapRange[1]-1]
         this._map = [];
         for (var y = 0; y <= mapRange[1]-1; y++) {
             var columns = [];
