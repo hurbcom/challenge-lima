@@ -1,1 +1,4 @@
 startGrid
+package-lock.json
+node_modules
+.editorconfig
