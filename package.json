@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node test/index.test.js"
   },
+  "bin": {
+    "startGrid": "index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maypimentel/challenge-echo.git"

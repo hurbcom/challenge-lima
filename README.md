@@ -14,24 +14,36 @@ ex:
 <a href="https://asciinema.org/a/n3Ufy21fz6VavHPglju9h0rEZ" target="_blank"><img src="https://asciinema.org/a/n3Ufy21fz6VavHPglju9h0rEZ.png" /></a>
 Nesse exemplo, as coordenadas de inicalização do drone e para qual ponto cardeal ele deve estar apontado no início foi enviada juntamente com a sequência de comandos.
 
+# Resposta
+
 ## Liguagem
-- Dentre as linguagens sugeridas, foi escolhido o NodeJS devido a conhecimento prévio da linguagem.
+- Dentre as linguagens sugeridas, foi escolhido o NodeJS devido a conhecimento prévio em JavaScript, mas não necessariamente em NodeJS.
+
 ## Como executar
-- Requisito: Docker
+- Requisito: Docker, make
 - Executando:
 ```bash
   $> git clone https://github.com/maypimentel/challenge-echo.git
   $> cd challenge-echo
-  $> ./run.sh __XXxYY__
+  $> make run
+  $> startGrid XXxYY
+  $> exit
 ```
+#### Exemplo:
+- `$> startGrid 20x20` -> Irá iniciar um grid de dimenções [X,Y] = [20,20]
+- Explicando o formato do comando: Ex: `0806SDFEEF`
+  - `[0806]SDFEEF` -> Os 4 primeiros dígitos indicam onde o drone irá iniciar. Nesse caso 0806 ~= [X,Y] = [08,06];
+  - `0806[S]DFEEF` -> Indica a direção da face do Drone, neste caso, `S` para o Sul, podendo ser ainda `N` Norte, `L` Leste, `O` Oeste;
+  - `0806S[DFEEF]` -> Comandos de movimentação do drone, onde a Letra `D` é virar 90ᵒ para Direita, a Letra `F` é andar 1 metro à frente e a Letra `E` é virar 90ᵒ para a Esquerda.
 ## Bônus
 - Ao final, poderá ser impresso o grid com as marcações de onde os drones obtiveram as fotografias.
 - Teste unitátio:
   ```bash
-    $> ./test.sh
+    $> make run-test
   ``` 
 ## Backlog
 - Implementar paralelismo, de maneira que os comandos dos drones possam ser executados em paralelo.
+
 
 <p align="center">
   <img src="challenge_done.png" alt="Challange done" />

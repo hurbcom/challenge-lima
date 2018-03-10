@@ -1,6 +1,6 @@
 const test = require('tape');
-const Drone = require('../src/controller/droneController');
-const Commands = require('../src/lib/commands');
+const Drone = require('../src/lib/drone.js');
+const Commands = require('../src/lib/commands.js');
 
 test('Init Drone', (t) => {
     drone = new Drone(1,5,4,'L',[6,8]);
