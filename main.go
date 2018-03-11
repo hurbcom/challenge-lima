@@ -111,9 +111,9 @@ func (d *drone) Command(s string, a *area) {
 			sy += readRune(v)
 		} else if i == 4 {
 			d.z = readRune(v)
-		} else {
 			d.x, _ = strconv.Atoi(sx)
 			d.y, _ = strconv.Atoi(sy)
+		} else {
 			if readRune(v) != "F" {
 				d.photos++
 			}
@@ -122,7 +122,6 @@ func (d *drone) Command(s string, a *area) {
 				log.Fatal(err)
 			}
 			d.updateCoord(x, y, a)
-			fmt.Println(d)
 		}
 	}
 }
