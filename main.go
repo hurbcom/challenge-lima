@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"strconv"
 	"strings"
 	"unicode"
 )
@@ -45,7 +46,7 @@ func (d *drone) updateDronePos(c string) (int, int, error) {
 		} else if d.z == "L" {
 			d.z = "N"
 		}
-		return 0, 1, nil
+		return -1, 0, nil
 	case "F":
 		if d.z == "N" {
 			return 0, 1, nil
@@ -78,7 +79,6 @@ func readRune(r rune) string {
 }
 
 func (d *drone) validateCommand(s string, a *area) error {
-	s = strings.ToUpper(s)
 	if len(s) < 5 {
 		return errors.New("Invalid command! It's length must be greater than 5")
 	}
@@ -99,8 +99,11 @@ func (d *drone) validateCommand(s string, a *area) error {
 }
 func (d *drone) Command(s string, a *area) {
 	s = strings.ToUpper(s)
+	err := d.validateCommand(s, a)
+	if err != nil {
+		log.Fatal(err)
+	}
 	var sx, sy string
-
 	for i, v := range s {
 		if i < 2 {
 			sx += readRune(v)
@@ -109,6 +112,8 @@ func (d *drone) Command(s string, a *area) {
 		} else if i == 4 {
 			d.z = readRune(v)
 		} else {
+			d.x, _ = strconv.Atoi(sx)
+			d.y, _ = strconv.Atoi(sy)
 			if readRune(v) != "F" {
 				d.photos++
 			}
@@ -117,9 +122,13 @@ func (d *drone) Command(s string, a *area) {
 				log.Fatal(err)
 			}
 			d.updateCoord(x, y, a)
+			fmt.Println(d)
 		}
 	}
-	fmt.Println(d)
+}
+
+func (d *drone) Report() {
+	fmt.Printf("x: %d\ny: %d\ncompass: %s\nphotos: %d\n", d.x, d.y, d.z, d.photos)
 }
 
 func main() {
