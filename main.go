@@ -1,15 +1,17 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"log"
-	"strconv"
 	"strings"
+	"unicode"
 )
 
 type drone struct {
-	x, y   string
+	x, y   int
 	photos int
-	z      rune
+	z      string
 }
 
 type area struct {
@@ -20,38 +22,104 @@ func NewArea(x, y int) *area {
 	return &area{x, y}
 }
 
-func (d *drone) coord(x int, y int, z rune) {
-	sx, _ := strconv.Atoi(d.x)
-	d.x = strconv.Itoa(sx + x)
-
-	sy, _ := strconv.Atoi(d.y)
-	d.y = strconv.Itoa(sy + y)
-
-	d.z = z
+func (d *drone) updateDronePos(c string) (int, int, error) {
+	switch c {
+	case "D":
+		if d.z == "N" {
+			d.z = "L"
+		} else if d.z == "L" {
+			d.z = "S"
+		} else if d.z == "S" {
+			d.z = "O"
+		} else if d.z == "O" {
+			d.z = "N"
+		}
+		return 1, 0, nil
+	case "E":
+		if d.z == "N" {
+			d.z = "O"
+		} else if d.z == "O" {
+			d.z = "S"
+		} else if d.z == "S" {
+			d.z = "L"
+		} else if d.z == "L" {
+			d.z = "N"
+		}
+		return 0, 1, nil
+	case "F":
+		if d.z == "N" {
+			return 0, 1, nil
+		} else if d.z == "S" {
+			return 0, -1, nil
+		} else if d.z == "L" {
+			return 1, 0, nil
+		} else if d.z == "O" {
+			return -1, 0, nil
+		}
+		return 0, 0, errors.New("Invalid drone state!")
+	default:
+		return 0, 0, errors.New(fmt.Sprintf("Invalid command %s", c))
+	}
+}
+func (d *drone) updateCoord(x, y int, a *area) error {
+	if (d.x+x > a.x) || (d.y+y > a.y) || (d.y+y < 0) || (d.x+x < 0) {
+		return errors.New("Invalid command. Drone location is out of range.")
+	}
+	d.x += x
+	d.y += y
+	return nil
 }
 
 func (d *drone) takePhoto() {
 	d.photos++
 }
+func readRune(r rune) string {
+	return fmt.Sprintf("%c", r)
+}
 
-func (d *drone) Command(s string, a *area) {
-	if len(s) < 5 {
-		log.Fatal("Invalid command! It's length must be greater than 5")
-	}
+func (d *drone) validateCommand(s string, a *area) error {
 	s = strings.ToUpper(s)
+	if len(s) < 5 {
+		return errors.New("Invalid command! It's length must be greater than 5")
+	}
 	for i, v := range s {
-		if i < 2 {
-			d.x += strconv.QuoteRune(v)
-		} else if i < 4 {
-			d.y += strconv.QuoteRune(v)
-		} else if i == 5 {
-			d.z = v
-		} else {
-			if v != 'F' {
-				d.photos++
+		if i > 4 {
+			if readRune(v) != "D" && readRune(v) != "E" && readRune(v) != "F" {
+				return errors.New(fmt.Sprintf("Invalid command. '%c' was found and it's not valid.", v))
 			}
+		} else if i < 4 {
+			if !unicode.IsNumber(v) {
+				return errors.New(fmt.Sprintf("Invalid initial position. '%c' isn't valid.", v))
+			}
+		} else if i == 4 && readRune(v) != "N" && readRune(v) != "S" && readRune(v) != "L" && readRune(v) != "O" {
+			return errors.New(fmt.Sprintf("Invalid orientation '%c'.", v))
 		}
 	}
+	return nil
+}
+func (d *drone) Command(s string, a *area) {
+	s = strings.ToUpper(s)
+	var sx, sy string
+
+	for i, v := range s {
+		if i < 2 {
+			sx += readRune(v)
+		} else if i < 4 {
+			sy += readRune(v)
+		} else if i == 4 {
+			d.z = readRune(v)
+		} else {
+			if readRune(v) != "F" {
+				d.photos++
+			}
+			x, y, err := d.updateDronePos(readRune(v))
+			if err != nil {
+				log.Fatal(err)
+			}
+			d.updateCoord(x, y, a)
+		}
+	}
+	fmt.Println(d)
 }
 
 func main() {
