@@ -11,7 +11,7 @@ func TestPhotosCommand(t *testing.T) {
 
 	d.Command("0112ODEDFFFEDF", a)
 	if d.photos != 5 {
-		t.Error("Wrong initial position. Expected 0112O, but received " + strconv.Itoa(d.photos))
+		t.Errorf("Expected 5 photos, but %s photos has been taken.", strconv.Itoa(d.photos))
 	}
 
 	d2 := drone{}
@@ -63,16 +63,30 @@ func TestDroneFinalPosition(t *testing.T) {
 
 func TestValidateCommand(t *testing.T) {
 	d := drone{}
-	a := area{}
-	err := d.validateCommand("1620NDEF", &a)
 
+	err := d.validateCommand("1620NDEF")
 	if err != nil {
 		t.Error("A valid command was invalidated.", err)
 	}
 
-	err = d.validateCommand("11A5LDED", &a)
-
+	err = d.validateCommand("11A5LDED")
 	if err == nil {
 		t.Error("An invalid command was accepted: ", "11A5LDED")
+	}
+}
+
+func TestDronePosOutOfRange(t *testing.T) {
+	d := drone{}
+	a := area{2, 2}
+
+	err := d.Command("0304NE", &a)
+	if err == nil {
+		t.Error("Drone is out of range. Error must be returned by Command function.")
+	}
+
+	d2 := drone{}
+	err = d2.Command("0101OEEEE", &a)
+	if err == nil {
+		t.Error("Drone has gone out of range. Error must be returned by Command function.")
 	}
 }

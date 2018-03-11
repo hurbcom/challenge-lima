@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"log"
 	"strconv"
 	"strings"
 	"unicode"
@@ -78,7 +77,7 @@ func readRune(r rune) string {
 	return fmt.Sprintf("%c", r)
 }
 
-func (d *drone) validateCommand(s string, a *area) error {
+func (d *drone) validateCommand(s string) error {
 	if len(s) < 5 {
 		return errors.New("Invalid command! It's length must be greater than 5")
 	}
@@ -97,11 +96,11 @@ func (d *drone) validateCommand(s string, a *area) error {
 	}
 	return nil
 }
-func (d *drone) Command(s string, a *area) {
+func (d *drone) Command(s string, a *area) error {
 	s = strings.ToUpper(s)
-	err := d.validateCommand(s, a)
+	err := d.validateCommand(s)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	var sx, sy string
 	for i, v := range s {
@@ -113,17 +112,24 @@ func (d *drone) Command(s string, a *area) {
 			d.z = readRune(v)
 			d.x, _ = strconv.Atoi(sx)
 			d.y, _ = strconv.Atoi(sy)
+			if d.x > a.x || d.y > a.y {
+				return errors.New("Invalid initial position. It is out of range.")
+			}
 		} else {
 			if readRune(v) != "F" {
 				d.photos++
 			}
 			x, y, err := d.updateDronePos(readRune(v))
 			if err != nil {
-				log.Fatal(err)
+				return err
 			}
-			d.updateCoord(x, y, a)
+			err = d.updateCoord(x, y, a)
+			if err != nil {
+				return err
+			}
 		}
 	}
+	return nil
 }
 
 func (d *drone) Report() {
