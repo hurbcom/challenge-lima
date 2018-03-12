@@ -137,5 +137,16 @@ func (d *drone) Command(s string, a *area) error {
 }
 
 func (d *drone) Report() {
-	fmt.Printf("x: %d\ny: %d\ncompass: %s\nphotos: %d\n", d.x, d.y, d.z, d.photos)
+	var direction string
+	switch d.z {
+	case "N":
+		direction = "Norte"
+	case "S":
+		direction = "Sul"
+	case "L":
+		direction = "Leste"
+	case "O":
+		direction = "Oeste"
+	}
+	fmt.Printf("- Final position: [%d, %d]\n- Direction: %s\n- Pictures taken: %d\n", d.x, d.y, direction, d.photos)
 }

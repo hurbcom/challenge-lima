@@ -20,7 +20,6 @@ func main() {
 		log.Fatal("You must inform the grid dimension. Ex.: 10x20")
 	}
 	args = strings.Split(args[0], "x")
-	fmt.Println(args)
 	fmt.Printf("Generating flying grid with dimensions of %sm by %sm.\n\n", args[0], args[1])
 	x, _ := strconv.Atoi(args[0])
 	y, _ := strconv.Atoi(args[1])
