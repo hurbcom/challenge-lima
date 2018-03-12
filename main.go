@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	command := "Initial command"
+	var command string
 	count := 1
 	reader := bufio.NewReader(os.Stdin)
 
@@ -25,11 +25,14 @@ func main() {
 	y, _ := strconv.Atoi(args[1])
 	a := drone.NewArea(x, y)
 
-	for len(command) > 0 {
-		fmt.Printf("Please inform the command sequence for drone %d or leve empty to exit: ", count)
+	for {
+		fmt.Printf("Please inform the command sequence for drone %d or leave empty to exit: ", count)
 		command, _ = reader.ReadString('\n')
+		if command == "\n" {
+			os.Exit(0)
+		}
 		d := drone.NewDrone()
-		err := d.Command(command, a)
+		err := d.Command(strings.TrimSuffix(command, "\n"), a)
 		if err != nil {
 			log.Fatal(err)
 		}

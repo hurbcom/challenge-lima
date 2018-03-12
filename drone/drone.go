@@ -62,7 +62,7 @@ func (d *drone) updateDronePos(c string) (int, int, error) {
 		}
 		return 0, 0, errors.New("Invalid drone state!")
 	default:
-		return 0, 0, nil
+		return 0, 0, errors.New("Invalid command " + c)
 	}
 }
 func (d *drone) updateCoord(x, y int, a *area) error {
@@ -86,7 +86,7 @@ func (d *drone) validateCommand(s string) error {
 		return errors.New("Invalid command! It's length must be greater than 5")
 	}
 	for i, v := range s {
-		if i > 4 && len(s) < i {
+		if i > 4 {
 			if readRune(v) != "D" && readRune(v) != "E" && readRune(v) != "F" {
 				return errors.New(fmt.Sprintf("Invalid command. '%s' was found and it's not valid.", readRune(v)))
 			}
