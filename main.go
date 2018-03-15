@@ -13,6 +13,7 @@ import (
 func main() {
 	var command string
 	var drones []drone.Drone
+	var commands []string
 	count := 1
 	reader := bufio.NewReader(os.Stdin)
 
@@ -32,20 +33,34 @@ func main() {
 		if command == "\n" {
 			break
 		}
-		d := drone.NewDrone()
-		err := d.Command(strings.TrimSuffix(command, "\n"), a)
-		if err != nil {
-			log.Fatal(err)
+
+		if isRepeated(commands, command) {
+			fmt.Printf("There is already a drone in position [%s %s].\n\n", command[:1], command[1:2])
+		} else {
+			commands = append(commands, command)
+			d := drone.NewDrone()
+			err := d.Command(strings.TrimSuffix(command, "\n"), a)
+			if err != nil {
+				log.Fatal(err)
+			}
+			drones = append(drones, *d)
+			count++
 		}
-		drones = append(drones, *d)
-		count++
 	}
 
 	for i, v := range drones {
 		fmt.Printf("Drone %d\n", i+1)
 		report(v)
-		fmt.Println()
 	}
+}
+
+func isRepeated(cs []string, c string) bool {
+	for _, v := range cs {
+		if v[:4] == c[:4] {
+			return true
+		}
+	}
+	return false
 }
 
 func report(d drone.Drone) {
@@ -61,5 +76,5 @@ func report(d drone.Drone) {
 	case "O":
 		direction = "Oeste"
 	}
-	fmt.Printf("- Final position: [%d, %d]\n- Direction: %s\n- Pictures taken: %d\n", x, y, direction, photosTaken)
+	fmt.Printf("- Final position: [%d, %d]\n- Direction: %s\n- Pictures taken: %d\n\n", x, y, direction, photosTaken)
 }
