@@ -8,7 +8,7 @@ import (
 	"unicode"
 )
 
-type drone struct {
+type Drone struct {
 	x, y   int
 	photos int
 	z      string
@@ -22,11 +22,16 @@ func NewArea(x, y int) *area {
 	return &area{x, y}
 }
 
-func NewDrone() *drone {
-	return &drone{}
+func NewDrone() *Drone {
+	return &Drone{}
 }
 
-func (d *drone) updateDronePos(c string) (int, int, error) {
+//gets x, y, photos, z
+func (d *Drone) GetInfo() (int, int, int, string) {
+	return d.x, d.y, d.photos, d.z
+}
+
+func (d *Drone) updateDronePos(c string) (int, int, error) {
 	switch c {
 	case "D":
 		if d.z == "N" {
@@ -65,7 +70,7 @@ func (d *drone) updateDronePos(c string) (int, int, error) {
 		return 0, 0, errors.New("Invalid command " + c)
 	}
 }
-func (d *drone) updateCoord(x, y int, a *area) error {
+func (d *Drone) updateCoord(x, y int, a *area) error {
 	if (d.x+x > a.x) || (d.y+y > a.y) || (d.y+y < 0) || (d.x+x < 0) {
 		return errors.New("Invalid command. Drone location is out of range.")
 	}
@@ -74,14 +79,14 @@ func (d *drone) updateCoord(x, y int, a *area) error {
 	return nil
 }
 
-func (d *drone) takePhoto() {
+func (d *Drone) takePhoto() {
 	d.photos++
 }
 func readRune(r rune) string {
 	return fmt.Sprintf("%c", r)
 }
 
-func (d *drone) validateCommand(s string) error {
+func (d *Drone) validateCommand(s string) error {
 	if len(s) < 5 {
 		return errors.New("Invalid command! It's length must be greater than 5")
 	}
@@ -100,7 +105,7 @@ func (d *drone) validateCommand(s string) error {
 	}
 	return nil
 }
-func (d *drone) Command(s string, a *area) error {
+func (d *Drone) Command(s string, a *area) error {
 	s = strings.ToUpper(s)
 	err := d.validateCommand(s)
 	if err != nil {
@@ -136,7 +141,7 @@ func (d *drone) Command(s string, a *area) error {
 	return nil
 }
 
-func (d *drone) Report() {
+func (d *Drone) Report() {
 	var direction string
 	switch d.z {
 	case "N":

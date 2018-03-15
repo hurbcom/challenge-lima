@@ -6,7 +6,7 @@ import (
 )
 
 func TestPhotosCommand(t *testing.T) {
-	d := drone{}
+	d := Drone{}
 	a := NewArea(15, 20)
 
 	d.Command("0112ODEDFFFEDF", a)
@@ -14,7 +14,7 @@ func TestPhotosCommand(t *testing.T) {
 		t.Errorf("Expected 5 photos, but %s photos has been taken.", strconv.Itoa(d.photos))
 	}
 
-	d2 := drone{}
+	d2 := Drone{}
 	d2.Command("0112NFF", a)
 	if d2.photos != 0 {
 		t.Errorf("Photos should't have been taken. Photos: %d", d.photos)
@@ -22,11 +22,11 @@ func TestPhotosCommand(t *testing.T) {
 }
 
 func TestDroneFinalPosition(t *testing.T) {
-	d := drone{}
+	d := Drone{}
 	a := NewArea(20, 20)
 
 	d.Command("1010NE", a)
-	expected := drone{
+	expected := Drone{
 		photos: 1,
 		x:      9,
 		y:      10,
@@ -42,9 +42,9 @@ func TestDroneFinalPosition(t *testing.T) {
 		t.Errorf("Invalid 'z' value: '%s'. Expected: '%s'", d.z, expected.z)
 	}
 
-	d2 := drone{}
+	d2 := Drone{}
 	d2.Command("1010NFFDD", a)
-	expected2 := drone{
+	expected2 := Drone{
 		photos: 2,
 		x:      12,
 		y:      12,
@@ -62,7 +62,7 @@ func TestDroneFinalPosition(t *testing.T) {
 }
 
 func TestValidateCommand(t *testing.T) {
-	d := drone{}
+	d := Drone{}
 
 	err := d.validateCommand("1620NDEF")
 	if err != nil {
@@ -76,7 +76,7 @@ func TestValidateCommand(t *testing.T) {
 }
 
 func TestDronePosOutOfRange(t *testing.T) {
-	d := drone{}
+	d := Drone{}
 	a := area{2, 2}
 
 	err := d.Command("0304NE", &a)
@@ -84,7 +84,7 @@ func TestDronePosOutOfRange(t *testing.T) {
 		t.Error("Drone is out of range. Error must be returned by Command function.")
 	}
 
-	d2 := drone{}
+	d2 := Drone{}
 	err = d2.Command("0101OEEEE", &a)
 	if err == nil {
 		t.Error("Drone has gone out of range. Error must be returned by Command function.")

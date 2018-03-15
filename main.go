@@ -12,6 +12,7 @@ import (
 
 func main() {
 	var command string
+	var drones []drone.Drone
 	count := 1
 	reader := bufio.NewReader(os.Stdin)
 
@@ -29,14 +30,36 @@ func main() {
 		fmt.Printf("Please inform the command sequence for drone %d or leave empty to exit: ", count)
 		command, _ = reader.ReadString('\n')
 		if command == "\n" {
-			os.Exit(0)
+			break
 		}
 		d := drone.NewDrone()
 		err := d.Command(strings.TrimSuffix(command, "\n"), a)
 		if err != nil {
 			log.Fatal(err)
 		}
-		d.Report()
+		drones = append(drones, *d)
 		count++
 	}
+
+	for i, v := range drones {
+		fmt.Printf("Drone %d\n", i+1)
+		report(v)
+		fmt.Println()
+	}
+}
+
+func report(d drone.Drone) {
+	var direction string
+	x, y, photosTaken, camOrient := d.GetInfo()
+	switch camOrient {
+	case "N":
+		direction = "Norte"
+	case "S":
+		direction = "Sul"
+	case "L":
+		direction = "Leste"
+	case "O":
+		direction = "Oeste"
+	}
+	fmt.Printf("- Final position: [%d, %d]\n- Direction: %s\n- Pictures taken: %d\n", x, y, direction, photosTaken)
 }
