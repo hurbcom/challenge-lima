@@ -10,7 +10,7 @@ func TestPhotosCommand(t *testing.T) {
 	a := NewArea(15, 20)
 
 	d.Command("0112ODEDFFFEDF", a)
-	if d.photos != 5 {
+	if d.photos != 4 {
 		t.Errorf("Expected 5 photos, but %s photos has been taken.", strconv.Itoa(d.photos))
 	}
 
@@ -77,15 +77,15 @@ func TestValidateCommand(t *testing.T) {
 
 func TestDronePosOutOfRange(t *testing.T) {
 	d := Drone{}
-	a := area{2, 2}
+	a := NewArea(1, 1)
 
-	err := d.Command("0304NE", &a)
+	err := d.Command("0304NE", a)
 	if err == nil {
 		t.Error("Drone is out of range. Error must be returned by Command function.")
 	}
 
 	d2 := Drone{}
-	err = d2.Command("0101OEEEE", &a)
+	err = d2.Command("0101OEEEE", a)
 	if err == nil {
 		t.Error("Drone has gone out of range. Error must be returned by Command function.")
 	}

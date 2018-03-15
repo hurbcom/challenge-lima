@@ -15,11 +15,19 @@ type Drone struct {
 }
 
 type area struct {
-	x, y int
+	x, y   int
+	mapped []bool
 }
 
 func NewArea(x, y int) *area {
-	return &area{x, y}
+
+	b := make([]bool, x*y)
+	for i := 0; i < x; i++ {
+		for j := 0; j < y; j++ {
+			b[(i*x)+j] = false
+		}
+	}
+	return &area{x, y, b}
 }
 
 func NewDrone() *Drone {
@@ -65,14 +73,14 @@ func (d *Drone) updateDronePos(c string) (int, int, error) {
 		} else if d.z == "O" {
 			return -1, 0, nil
 		}
-		return 0, 0, errors.New("Invalid drone state!")
+		return 0, 0, errors.New("Invalid drone state")
 	default:
 		return 0, 0, errors.New("Invalid command " + c)
 	}
 }
 func (d *Drone) updateCoord(x, y int, a *area) error {
 	if (d.x+x > a.x) || (d.y+y > a.y) || (d.y+y < 0) || (d.x+x < 0) {
-		return errors.New("Invalid command. Drone location is out of range.")
+		return errors.New("Invalid command. Drone location is out of range")
 	}
 	d.x += x
 	d.y += y
@@ -93,14 +101,14 @@ func (d *Drone) validateCommand(s string) error {
 	for i, v := range s {
 		if i > 4 {
 			if readRune(v) != "D" && readRune(v) != "E" && readRune(v) != "F" {
-				return errors.New(fmt.Sprintf("Invalid command. '%s' was found and it's not valid.", readRune(v)))
+				return errors.New(fmt.Sprintf("Invalid command. '%s' was found and it's not valid", readRune(v)))
 			}
 		} else if i < 4 {
 			if !unicode.IsNumber(v) {
-				return errors.New(fmt.Sprintf("Invalid initial position. '%c' isn't valid.", v))
+				return errors.New(fmt.Sprintf("Invalid initial position. '%c' isn't valid", v))
 			}
 		} else if i == 4 && readRune(v) != "N" && readRune(v) != "S" && readRune(v) != "L" && readRune(v) != "O" {
-			return errors.New(fmt.Sprintf("Invalid orientation '%c'.", v))
+			return errors.New(fmt.Sprintf("Invalid orientation '%c'", v))
 		}
 	}
 	return nil
@@ -122,11 +130,15 @@ func (d *Drone) Command(s string, a *area) error {
 			d.x, _ = strconv.Atoi(sx)
 			d.y, _ = strconv.Atoi(sy)
 			if d.x > a.x || d.y > a.y {
-				return errors.New("Invalid initial position. It is out of range.")
+				return errors.New("Invalid initial position. It is out of range")
 			}
 		} else {
-			if readRune(v) != "F" {
+			if len(a.mapped) < (d.x*a.x)+d.y {
+				return errors.New("Drone position is out of range")
+			}
+			if readRune(v) != "F" && a.mapped[(d.x*a.x)+d.y] == false {
 				d.photos++
+				a.mapped[(d.x*a.x)+d.y] = true
 			}
 			x, y, err := d.updateDronePos(readRune(v))
 			if err != nil {
