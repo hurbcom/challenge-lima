@@ -31,11 +31,10 @@ class Drone:
             self.girarDrone(proxCmd)
         else:
             self.moverDrone()
-            posAtual = [self.__posicaoX,self.__posicaoY]
+            posAtual = [self.__posicaoX,self.__posicaoY]            
             if posAtual not in self.__posVisitada:
-                self.__numFotos += 1
-
-            
+                self.__posVisitada.append(posAtual)
+                self.__numFotos += 1            
    
     ''' 
     Se o Drone esta virado para Norte e vira um angulo de 90º para a esquerda                
@@ -71,8 +70,7 @@ class Drone:
                 self.__direcao = "O"
                     
             else:
-                self.__direcao = "S"
-        
+                self.__direcao = "S"        
       
             
     # dada a Posicao XY do Drone e sua Direcao Atual retorna a nova Posicao
@@ -102,6 +100,9 @@ class Drone:
                 self.__direcao = "L"
             else:
                 self.__posicaoX -= 1
+        
+        
+        
                 
     
     # diz se ainda ha comandos a serem executados pelo drone

@@ -12,25 +12,8 @@ class TestDrone(unittest.TestCase):
         #portanto : (9,10,O)        
         droneTeste = Drone(10,10,"O","FFFF",15,15)      
         droneTeste.moverDrone()             
-        self.assertEqual([droneTeste.getPosX(),droneTeste.getPosY(),droneTeste.getDirecao()] , [9,10,"O"])
-        
-        #ao se movimentar para Leste a Posicao X deve aumentar em 1, mas a Direcao e Posicao Y nao devem mudar  
-        #portanto : (10,10,L)  
-        droneTeste.direcao = "L"
-        droneTeste.moverDrone()
-        self.assertEqual([droneTeste.getPosX(),droneTeste.getPosY(),droneTeste.getDirecao()],[10,10,"L"])
-        
-        #ao se movimentar para Norte a Posicao Y deve aumentar em 1, mas a Direcao e Posicao X nao devem mudar  
-        #portanto : (10,11,N)  
-        droneTeste.direcao = "N"
-        droneTeste.moverDrone()
-        self.assertEqual([droneTeste.getPosX(),droneTeste.getPosY(),droneTeste.getDirecao()],[10,11,"N"])
-        
-        #ao se movimentar para Sul a Posicao Y deve reduzir em 1, mas a Direcao e Posicao X nao devem mudar  
-        #portanto : (10,10,S)   
-        droneTeste.direcao = "S"
-        droneTeste.moverDrone()
-        self.assertEqual([droneTeste.getPosX(),droneTeste.getPosY(),droneTeste.getDirecao()],[10,10,"S"])
+        self.assertEqual([droneTeste.getPosX(),droneTeste.getPosY(),droneTeste.getDirecao()] , [9,10,"O"])        
+       
     
     def test_SairDaGrid(self):
         

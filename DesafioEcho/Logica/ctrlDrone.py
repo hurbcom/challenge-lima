@@ -2,11 +2,11 @@
 
 from drone import Drone
 from Erros.erroCmdInvalido     import CmdInvalido
+from Erros.erroCmdIncompleto   import CmdIncompleto
 from Erros.erroDirecaoInvalida import DirInvalida
 from Erros.erroPosForaGrid     import PosForaGrid
 from Erros.erroPosOcupada      import PosOcupada
 from Erros.erroPosInvalida     import PosInvalida
-from Erros.erroCmdIncompleto   import CmdIncompleto
 
 class CtrlDrone:
     
@@ -14,7 +14,7 @@ class CtrlDrone:
         self.__alturaGrid = altura
         self.__larguraGrid = largura
         self.__dronesAtuais = []
-        self.__posIniDrones = []    
+        self.__posOcupadas = []    
    
     
     #dada uma Sequencia de Comandos posiciona um Drone
@@ -24,7 +24,7 @@ class CtrlDrone:
         
         novoDrone = Drone(int(seqCmd[0]),int(seqCmd[1]),seqCmd[2],seqCmd[3],int(self.__larguraGrid),int(self.__alturaGrid))  
         
-        self.__posIniDrones.append(posNovoDrone)
+        self.__posOcupadas.append(posNovoDrone)
         self.__dronesAtuais.append(novoDrone)  
       
     
@@ -42,6 +42,8 @@ class CtrlDrone:
             #deletando os digitos já utilizados
             sequenciaComd = sequenciaComd[len(self.__larguraGrid):]
             
+            # e necessario verificar se ainda ha comandos na Sequencia de Comandos
+            # se nao houver mais Comandos, ela esta incompleta
             if len(sequenciaComd) == 0:
                 raise CmdIncompleto
             
@@ -51,9 +53,8 @@ class CtrlDrone:
             self.validarPosicao(posicaoX,posicaoY)
             
             if len(sequenciaComd) == 0:
-                raise CmdIncompleto
-                
-            #uma vez removida as coordenadas do Drone o primeiro digito da String sera a Direcao do drone
+                raise CmdIncompleto                
+            
             direcao = sequenciaComd[0]
             sequenciaComd = sequenciaComd[1:]
             
@@ -64,8 +65,7 @@ class CtrlDrone:
             
             self.validarSeqCmd(direcao,sequenciaComd)            
            
-            return [posicaoX,posicaoY,direcao,sequenciaComd]
-            
+            return [posicaoX,posicaoY,direcao,sequenciaComd]            
                 
     
     
@@ -77,9 +77,8 @@ class CtrlDrone:
            
         for caracter in sequenciaComd:
             if caracter != "D" and caracter != "F" and caracter != "E":
-                raise CmdInvalido
+                raise CmdInvalido      
         
-        return "valido"
     
     #verifica se uma Posicao XY ja esta com um Drone ou se esta fora da Grid
     def validarPosicao(self,posX,posY):
@@ -90,9 +89,7 @@ class CtrlDrone:
             if int(posX) >= int(self.__larguraGrid) or int(posY) >= int(self.__alturaGrid):
                 raise PosForaGrid
                   
-            if posicao not in self.__posIniDrones:
-                return "valido"
-            else:
+            if posicao in self.__posOcupadas:
                 raise PosOcupada
         else:
             raise PosInvalida
