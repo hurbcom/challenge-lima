@@ -20,6 +20,7 @@ main()
 	vector <int> foto_final; 
 
 	drone=1;
+	printf ("\n::: Informe a area como no exemplo a seguir: 10x20 :::");
 	printf ("\n Informe a Area: ");
 	getline(cin, comando);
 	
@@ -35,6 +36,7 @@ main()
 	}
 	
 	// Estrutura de repetição para receber comandos enquanto a resposta for vazio ou 'exit'
+		printf ("\n::: Informe a posicao que o drone ira iniciar, agora informe orientacao geografica e sequencia de comandos para o drone conforme o exemplo a seguir: 0101NDEFDEFDEF :::");
 	do{
 		
 		foto=1; // Uma foto é retirada na posição inicial
@@ -62,7 +64,7 @@ main()
 		}   
 		if(achou_pos_i==1)
 		{	
-			printf("\n ERRO:: Ja existe um drone nessa posicao. Favor inserir novo comando\n ");	
+			printf("\n ::: ERRO ::: Ja existe um drone nessa posicao. Favor inserir novo comando\n ");	
 		}
 		else{
 			posicao_inicial.push_back(posicao);
