@@ -1,0 +1,224 @@
+// Solução para o Desafio HU utilizando as linguagens C e C++
+
+
+#include<string.h>
+#include <iostream>
+#include<bits/stdc++.h>
+
+using namespace std;
+using std::string;
+
+main()
+{
+	// Inicialização de variáveis
+	int mapax, mapay, areax, areay, i, foto,achou,drone,achou_pos_i;
+	char cmd,posicao[10],orientacao;
+	string comando;
+	
+	vector <string> ultimas_posicoes, posicao_final, posicao_inicial;
+	vector <char> orientacao_final;
+	vector <int> foto_final; 
+
+	drone=1;
+	printf ("\n Informe a Area: ");
+	getline(cin, comando);
+	
+	// FOR para percorrer a string comando até encontrar 'x'
+	// Ao encontrar 'x', armazena o número anterior ao 'x' em mapax e armazena o número posterior ao 'x' em mapay
+	for (i=1;i<=comando.length();i++)
+	{
+		if(comando[i]=='x' || comando[i]=='X')
+		{
+			istringstream ( comando.substr(0,i) ) >> mapax;
+			istringstream ( comando.substr(i+1,comando.length()) ) >> mapay;
+		}
+	}
+	
+	// Estrutura de repetição para receber comandos enquanto a resposta for vazio ou 'exit'
+	do{
+		
+		foto=1; // Uma foto é retirada na posição inicial
+		achou=0; // Variável auxiliar para percorrer o vetor ultimas_posicoes e verificar se o drone atual já passou por determinado ponto
+		achou_pos_i=0; // Variável auxiliar para percorrer o vetor posicao_inicial e verificar se o drone atual iniciou no mesmo ponto de partida que outro drone
+		printf ("\n Informe a posicao, orientacao e a sequencia de comandos para o drone %d: ",drone);	
+		getline(cin, comando);		
+		
+		// Finaliza a estrutura de repetição caso o comando seja vazio ou 'exit'
+		if (comando=="" || comando=="exit" || comando=="EXIT") 
+			break;
+		
+		//Divide a string comando em areax, areay, orientação e comandos
+		istringstream ( comando.substr(0,2) ) >> areax;
+		istringstream ( comando.substr(2,2) ) >> areay;
+		orientacao=comando.substr(4,1)[0];
+		comando=comando.substr(5,comando.length());
+		
+		// transforma as coordenadas em string e verifica se algum drone já iniciou nessa coordenada
+		sprintf (posicao, "%d,%d", areax,areay);
+		for (int i=0; i<posicao_inicial.size(); i++)
+		{
+			if(posicao ==posicao_inicial[i])
+				achou_pos_i=1;
+		}   
+		if(achou_pos_i==1)
+		{	
+			printf("\n ERRO:: Ja existe um drone nessa posicao. Favor inserir novo comando\n ");	
+		}
+		else{
+			posicao_inicial.push_back(posicao);
+			
+			// estrutura de repetição para percorrer cada comando da lista de comandos 
+			for (i=0; i<=comando.length(); i++)
+			{
+				cmd = comando[i];
+				// conjunto de condições para executar uma ação de acordo com o comando e a orientação correspondente
+				if ((orientacao == 'N') && (cmd == 'F'))
+				{
+					// condição que verifica o limite do mapa
+					if(areay+1 <mapay)
+					{			
+						// transforma as coordenadas em string, adiciona a posição no vetor de ultimas_posicoes, atualiza a posição e verifica se nova posição já foi visitada
+						sprintf (posicao, "%d,%d", areax,areay);
+						ultimas_posicoes.push_back(posicao);						
+						areay=areay+1;						
+						sprintf (posicao, "%d,%d", areax,areay);											
+						for (int i=0; i<ultimas_posicoes.size(); i++)
+						{
+							if(posicao ==ultimas_posicoes[i])
+								achou=1;
+						}   
+			    		if(achou==0)
+						{	
+							foto=foto+1;	
+						}
+					}
+				}
+				else if ((orientacao == 'N') && (cmd == 'E'))
+				{
+					orientacao = 'O';
+				}
+				else if ((orientacao == 'N') && (cmd == 'D'))
+				{
+					orientacao = 'L';
+				}
+				else if ((orientacao == 'L') && (cmd == 'F'))
+				{
+					if(areax+1 <mapax)
+					{
+						sprintf (posicao, "%d,%d", areax,areay);
+						ultimas_posicoes.push_back(posicao);
+						
+						areax=areax+1;
+						
+						sprintf (posicao, "%d,%d", areax,areay);
+									
+						for (int i=0; i<ultimas_posicoes.size(); i++)
+						{
+							if(posicao ==ultimas_posicoes[i])
+								achou=1;
+						}   
+			    		if(achou==0)
+						{	
+							foto=foto+1;	
+						}
+					}
+				}
+				else if ((orientacao == 'L') && (cmd == 'E'))
+				{
+					orientacao = 'N';
+				}
+				else if ((orientacao == 'L') && (cmd == 'D'))
+				{
+					orientacao = 'S';
+				}
+				else if ((orientacao == 'S') && (cmd == 'F'))
+				{
+					if(areay-1 >0)
+					{
+						sprintf (posicao, "%d,%d", areax,areay);
+						ultimas_posicoes.push_back(posicao);
+						
+						areay=areay-1;
+						
+						sprintf (posicao, "%d,%d", areax,areay);
+									
+						for (int i=0; i<ultimas_posicoes.size(); i++)
+						{
+							if(posicao ==ultimas_posicoes[i])
+								achou=1;
+						}   
+			    		if(achou==0)
+						{	
+							foto=foto+1;	
+						}
+					}
+					
+				}
+				else if ((orientacao == 'S') && (cmd == 'E'))
+				{
+					orientacao = 'L';
+				}
+				else if ((orientacao == 'S') && (cmd == 'D'))
+				{
+					orientacao = 'O';
+				}
+				else if ((orientacao == 'O') && (cmd == 'F'))
+				{
+					if(areax-1 >0)
+					{
+						sprintf (posicao, "%d,%d", areax,areay);
+						ultimas_posicoes.push_back(posicao);
+						
+						areax=areax-1;
+						
+						sprintf (posicao, "%d,%d", areax,areay);
+									
+						for (int i=0; i<ultimas_posicoes.size(); i++)
+						{
+							if(posicao ==ultimas_posicoes[i])
+								achou=1;
+						}   
+			    		if(achou==0)
+						{	
+							foto=foto+1;	
+						}
+					}
+				}
+				else if ((orientacao == 'O') && (cmd == 'E'))
+				{
+					orientacao = 'S';
+				}
+				else if ((orientacao == 'O') && (cmd == 'D'))
+				{
+					orientacao = 'N';
+				}
+				
+				//Atualiza a variável auxiliar
+				achou=0;
+			}
+			
+			sprintf (posicao, "%d,%d", areax,areay);
+			
+			
+			// Armazena a posição final, orientação final e quantidade de fotos retiradas para ser exibida somente quando o usuario digitar vazio ou 'exit'
+			posicao_final.push_back(posicao);
+			orientacao_final.push_back(orientacao);
+			foto_final.push_back(foto);
+			drone=drone+1;
+			
+		}		
+		
+	} while(comando!="");
+	
+
+	// imprime a posição final, orientação final e quantidade de fotos retiradas de cada drone
+	for(i=1;i<drone;i++)
+	{
+		cout << "\n\t Drone:"<<i;
+		cout << "\n\t Posicao Final: ["<<posicao_final[i-1]<<"]";
+		cout << "\n\t Direcao: "<<orientacao_final[i-1];
+		cout << "\n\t Fotos tiradas: "<<foto_final[i-1];
+		cout << "\n";
+	}
+	
+}
