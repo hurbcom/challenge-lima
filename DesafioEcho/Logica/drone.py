@@ -13,7 +13,7 @@ class Drone:
         
         self.__direcao = dirIni
         self.__numFotos = 1
-        self.__posVisitada = [[eixoX,eixoY]]
+        self.__posVisitada = [[eixoX,eixoY,dirIni]]
         
         self.__status = True
     
@@ -31,7 +31,7 @@ class Drone:
             self.girarDrone(proxCmd)
         else:
             self.moverDrone()
-            posAtual = [self.__posicaoX,self.__posicaoY]            
+            posAtual = [self.__posicaoX,self.__posicaoY,self.__direcao]            
             if posAtual not in self.__posVisitada:
                 self.__posVisitada.append(posAtual)
                 self.__numFotos += 1            
@@ -128,6 +128,9 @@ class Drone:
         
     def getNumFotos(self):
         return self.__numFotos   
+    
+    def getSeq(self):
+        return self.__comdSequ
     
     
     

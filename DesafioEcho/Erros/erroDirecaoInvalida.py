@@ -4,4 +4,4 @@
 class DirInvalida(Exception):
     
     def __init__(self):         
-        self.mensagem = "A direção indicada no comando não é um Ponto Cardeal. Indique um ponto cardeal."
+        self.mensagem = "A direcao indicada para o drone nao e um Ponto Cardeal. As direcoes validas sao N, S, L e O"

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from ctrlDrone import CtrlDrone
+
+from Logica.ctrlDrone import CtrlDrone
 from Erros.erroCmdInvalido     import CmdInvalido
 from Erros.erroCmdIncompleto   import CmdIncompleto
 from Erros.erroDirecaoInvalida import DirInvalida
@@ -17,7 +18,7 @@ class FtrDrone():
         
     def inicializarControlador(self):
         
-        print("Digite a largura e a altura da área que os drones devem fotografar:")
+        print("Digite a largura e a altura da área que os drones devem fotografar: \n")
         grid = False
         while not grid:        
             largura = input("Largura:")
@@ -26,8 +27,10 @@ class FtrDrone():
             if largura.isdecimal() and altura.isdecimal():
                 if int(largura) > 0 and int(altura) > 0:
                     grid = True
+                    print(" \nFoi gerada uma area de ",int(largura)," x ", int(altura)," . \n")
             else:
-                print("Altura ou Largura inválidas para a criação de uma área. Certifique-se de digitar apenas números maiores de 0.") 
+                print("\n Altura ou Largura invalida para a criação de uma area. " + 
+                      "Certifique-se de digitar apenas numeros maiores que 0. \n") 
         
         self.meuControlador = CtrlDrone(largura,altura)
         
@@ -51,7 +54,7 @@ class FtrDrone():
                           " com a sequencia de comandos \"", seqValidada[3],"\". \n")
                     
                 except (CmdInvalido,CmdIncompleto,DirInvalida, PosForaGrid, PosOcupada,PosInvalida) as erro:
-                    print(erro.mensagem)         
+                    print("\n ",erro.mensagem, "\n")         
             else:
                 maisDrones = False  
                 
@@ -76,24 +79,14 @@ class FtrDrone():
             for drones in dronesAdicionados:
                 posFinal = [drones.getPosX(),drones.getPosY()]
                 print("Drone ",contador, " :")
-                print("     Posição Final:       ", posFinal)
-                print("     Direção:             ", self.ptsCardeais.get(drones.getDirecao()))
+                print("     Posicao Final:       ", posFinal)
+                print("     Direcao:             ", self.ptsCardeais.get(drones.getDirecao()))
                 print("     Quantidade de fotos  ", drones.getNumFotos()  )
                 contador += 1
         else:
-            print("Nenhum drone foi adicionado. Não há relatorio de atividades.")
-            
-def main():
-    
-    minhaFronteira = FtrDrone()
-    
-    minhaFronteira.inicializarControlador()
-    minhaFronteira.inicializarDrones()
-    minhaFronteira.imprimirRelatorio()           
-    
-if __name__ == "__main__":
-    main()
-                
+            print(" \n Nenhum drone foi adicionado. Nao ha relatorio de atividades. \n")
+           
+
    
             
     

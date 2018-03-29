@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from drone import Drone
+from Logica.drone import Drone
 from Erros.erroCmdInvalido     import CmdInvalido
 from Erros.erroCmdIncompleto   import CmdIncompleto
 from Erros.erroDirecaoInvalida import DirInvalida

@@ -1,5 +1,5 @@
 FROM python:3
 
-ADD DesafioEcho/* /
+COPY ./DesafioEcho ./DesafioEcho
 
-CMD [ "python", "./testesDrone.py" ]
+WORKDIR ./DesafioEcho

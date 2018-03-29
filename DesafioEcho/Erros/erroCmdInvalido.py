@@ -4,4 +4,4 @@
 class CmdInvalido(Exception):
     
     def __init__(self):         
-        self.mensagem = "A sequencia de comendos é inválida. Comandos devem ser apenas E, D ou F"
+        self.mensagem = "A sequencia de comandos possui caracteres invalidos. Comandos devem possuir apenas os caracteres E, D ou F"

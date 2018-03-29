@@ -4,4 +4,4 @@
 class CmdIncompleto(Exception):
     
     def __init__(self):         
-        self.mensagem = "A sequência de comandos está incompleta. Digite novamente."
+        self.mensagem = "A sequencia de comandos esta incompleta. Digite novamente."

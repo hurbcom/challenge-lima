@@ -4,4 +4,4 @@
 class PosOcupada(Exception):
     
     def __init__(self):         
-        self.mensagem = "A coordenada indicada já está ocupada. Informe outra coordenada."
+        self.mensagem = "A coordenada indicada ja está ocupada. Informe outra coordenada."

@@ -4,4 +4,4 @@
 class PosInvalida(Exception):
     
     def __init__(self):         
-        self.mensagem = "A posição inficada possui caracteres inválidos ou está em um formato incorreto."
+        self.mensagem = "A posicao inficada possui caracteres invalidos ou está em um formato incorreto."

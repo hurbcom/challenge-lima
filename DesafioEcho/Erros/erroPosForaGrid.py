@@ -4,4 +4,4 @@
 class PosForaGrid(Exception):
     
     def __init__(self):         
-        self.mensagem = "A posição que foi indicada está fora da área delimitada."
+        self.mensagem = "A coordenada que foi indicada esta fora da area delimitada."
