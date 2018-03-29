@@ -5,28 +5,35 @@ Este projeto é um simulador para controle de drones que tiram fotos 360º de um
 
 ## Executando o Projeto
 É necessário ter instalado: Python3.
+
 Alternativamente é possivel o uso do [Docker](https://www.docker.com/).
 
 ### Executando com Python
 Instalar [Python](https://www.python.org/downloads/) 3.X
+
 Executar o comando:
 `python ./DesafioEcho/main.py`
 
 ### Executando com Docker
 Instalar [Docker](https://docs.docker.com/install/)
+
 Executar os comandos:
+
 `docker build -t desafio-echo .`
 `docker run --rm -it desafio-echo python3 main.py`
 
 Também há a opção de executar um arquivo Shell Script executando o comando:
+
 `sh start.sh`
 
 ## Testes Automatizados
 O projeto também contem alguns testes automatizados.
+
 Os testes buscam checar se ao executar os métodos da classe Drone o objeto Drone assume o estado esperado.
 
 ### Executando os Testes
 Os testes podem ser executados utilizando  Python3 através do comando:
+
 `python ./DesafioEcho/Testes/testesDrone.py`
 
 ## Utilizando o Simulador
@@ -34,6 +41,7 @@ Um breve tutorial de como um usuário pode utilizar o simulador.
 
 ### Inicializando a Área
 Ao executar o projeto o usuário deverá informar qual a Largura e a Altura que ele deseja que a área a ser fotografada possua. A área deve ter sempre altura e largura maiores do que 0. Caso números válidos sejam informados, uma mensagem de confirmação irá surgir.
+
 ### Inicializando os Drones
 Uma vez que a área esteja criada é necessário posicionar os drones e indicar qual  será sua lista de comandos. Para isso é utilizada uma única sequência de caracteres que indicará qual a coordenada cartesiana que o drone será iniciado, em que direção dos pontos cardeais a câmera do drone está virada e por fim a lista de comandos daquele drone.
 
