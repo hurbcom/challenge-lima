@@ -20,6 +20,7 @@ Instalar [Docker](https://docs.docker.com/install/)
 Executar os comandos:
 
 `docker build -t desafio-echo .`
+
 `docker run --rm -it desafio-echo python3 main.py`
 
 Também há a opção de executar um arquivo Shell Script executando o comando:
