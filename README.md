@@ -20,6 +20,7 @@ Instalar [Docker](https://docs.docker.com/install/)
 Executar os comandos:
 
 `docker build -t desafio-echo .`
+
 `docker run --rm -it desafio-echo python3 main.py`
 
 Também há a opção de executar um arquivo Shell Script executando o comando:
@@ -27,7 +28,7 @@ Também há a opção de executar um arquivo Shell Script executando o comando:
 `sh start.sh`
 
 ## Testes Automatizados
-O projeto também contem alguns testes automatizados.
+O projeto também contém alguns testes automatizados.
 
 Os testes buscam checar se ao executar os métodos da classe Drone o objeto Drone assume o estado esperado.
 
