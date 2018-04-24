@@ -16,6 +16,11 @@ Nesse exemplo, as coordenadas de inicalização do drone e para qual ponto carde
 
 # Resposta
 
+## Desafio Extra
+**Pontos extras se você responder no README.md qual é o menor número de drones para mapear completamnente um grid de 10x10 metros com o menor número de passos possíveis!**
+
+Resposta: Apenas 1.
+
 ## Liguagem
 - O Desafio foi realizado utilizando a linguagem de programação C++, devido o conhecimento prévio em na linguagem c.
 
