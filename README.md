@@ -18,7 +18,7 @@ Você pode usar qualquer linguagem de programação para o desafio. Preferencial
 - JavaScript (NodeJS)
 - Go
 - Kotlin
-- Scala
+- Dart
 - C++
 
 Você pode usar qualquer _framework_. Se a sua escolhar for por um _framework_ que resulte em _boilerplate code_, por favor descreva no README qual pedaço de código foi escrito por você.
