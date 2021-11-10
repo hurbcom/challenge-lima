@@ -1,20 +1,22 @@
-# <img src="https://avatars1.githubusercontent.com/u/7063040?v=4&s=200.jpg" alt="HU" width="24" /> Desafio Lima
+# <img src="https://avatars1.githubusercontent.com/u/7063040?v=4&s=200.jpg" alt="HU" width="24" /> Lima Challenge
 
-Estamos desenvolvendo um produto que basicamente usa drones para mapear uma região e tirar fotos 360º e criar um mapa de navegável, muito parecido com o Google Street View. Então o desafio é criar uma ferramenta para controlar esses drones. 🚁
+[[English](README.md) | [Português](README.pt.md)]
 
-Imagine que a região aonde os drones devem sobrevoar é um plano de X por Y metros e os drones só vão se locomover dentro desse plano de metro em metro (logo eles se locomovem em um grid) e a cada ponto de parada eles vão tirar uma foto 360º.
+We're developing a product that basically uses drones to map a region and take 360º photos and create a navigable map, much like Google Street View. So the challenge is to create a tool to control these drones. 🚁
 
-Quando eles são ligados, devem receber uma cordenada cartesiana de para onde eles vão se posicionar e para qual lado do bússula a camêra deve estar apontando, por exemplo (4, 3, N) levará o drone para as coordenadas 4metros no eixo X e 3metros no eixo Y, apontando a câmera para norte. Os pontos cardeais esperados são 4: (N)orte, (S)ul, (L)este e (O)este.
+Imagine that the region where the drones must fly over is a plane of X by Y meters and the drones will only move within that plane from meter to meter (so they move in a grid) and at each stop point they will take a 360º photo.
 
-Uma vez ligados, cada drone deverá receber uma lista de comandos, em formato de string, que deverá ser executada sequencialmente e a cada comando executado uma foto 360º é tirada automaticamente. Os comandos possíveis são: (D)ireita, (E)squerda, (F)rente. A cada vez que o drone receber um comando de "D" ou "E" ele fará um giro de 90º. Ex: "DFFEEFDFE" Nesse exemplo vão ser tiradas 5 fotos.
+When they are turned on, they should receive a Cartesian coordinate of where they will position themselves and which side of the compass the camera should be pointing to, for example (4, 3, N) will take the drone to coordinates 4 meters on the X axis and 3 meters on the Y axis, pointing the camera north. The expected cardinal points are 4: (N)orth, (S)outh, (E)ast and (W)est.
 
-Construa um programa de linha de comando que ao ser iniciado receberá como parâmetros o tamanho da área que deve ser fotografada e então espere receber, a cada linha, a sequência de _strings_ para posicionar e movimentar cada drone. Ao final do programa deve ser exibido um simples relatório mostrando a posicão final, para qual ponto cardeal a câmera está apontando e quantas fotos foram tiradas por cada drone.
+Once connected, each drone must receive a list of commands, in string format, which must be executed sequentially and for each command executed a 360º photo is taken automatically. Possible commands are: (R)ight, (L)eft, (F)orward. Each time the drone receives a command of "R" or "L" it will make a 90º turn. Ex: "RFFLLFRFL" In this example, 5 photos will be taken.
+
+Build a command line program that when started will receive as parameters the size of the area that must be photographed and then expect to receive, on each line, the sequence of _strings_ to position and move each drone. At the end of the program, a simple report should be displayed showing the final position, which cardinal point the camera is pointing to and how many photos were taken by each drone.
 
 ex:
 <a href="https://asciinema.org/a/n3Ufy21fz6VavHPglju9h0rEZ" target="_blank"><img src="https://asciinema.org/a/n3Ufy21fz6VavHPglju9h0rEZ.png" /></a>
-Nesse exemplo, as coordenadas de inicalização do drone e para qual ponto cardeal ele deve estar apontado no início foi enviada juntamente com a sequência de comandos.
+In this example, the drone's initialization coordinates and which cardinal point it should be pointing to at the beginning were sent along with the command sequence.
 
-Você pode usar qualquer linguagem de programação para o desafio. Preferencialmente esperamos que seja uma das linguagens abaixo:
+You can use any programming language for the challenge. Preferably we hope it is one of the languages ​​below:
 
 -   JavaScript (NodeJS)
 -   Go
@@ -22,42 +24,42 @@ Você pode usar qualquer linguagem de programação para o desafio. Preferencial
 -   Dart
 -   C++
 
-Você pode usar qualquer _framework_. Se a sua escolhar for por um _framework_ que resulte em _boilerplate code_, por favor descreva no README qual pedaço de código foi escrito por você.
+You can use any _framework_. If your choice is for a _framework_ that results in _boilerplate code_, please describe in the README which piece of code you wrote.
 
-Pontos extras se você responder no README.md **qual é o menor número de drones para mapear completamnente um grid de 10x10 metros com o menor número de passos possíveis**!
+Extra points if you answer in README.md **which is the least number of drones to fully map a 10x10 meter grid with the fewest possible steps**!
 
-## Requisitos
+## Requirements
 
--   Os drones não podem voar para fora da área delimitada inicialmente. Uma vez que eles encostem em alguma borda, seu único movimento é girar
--   Não será tirada uma foto se o drone passar pela/ficar no mesmo ponto mais de uma vez
--   Não é possível iniciar dois drones na mesma coordenada cartesiana
--   Forkar esse desafio e criar o seu projeto (ou workspace) usando a sua versão desse repositório, tão logo acabe o desafio, submeta um _pull request_.
-    -   Caso você tenha algum motivo para não submeter um _pull request_, crie um repositório privado no Github, faça todo desafio na branch **master** e não se esqueça de preencher o arquivo `pull-request.txt`. Tão logo termine seu desenvolvimento, adicione como colaborador o usuário `automator-hurb` no seu repositório e o deixe disponível por pelo menos 30 dias. **Não adicione o `automator-hurb` antes do término do desenvolvimento.**
-    -   Caso você tenha algum problema para criar o repositório privado, ao término do desafio preencha o arquivo chamado `pull-request.txt`, comprima a pasta do projeto - incluindo a pasta `.git` - e nos envie por email.
--   O código precisa rodar dentro de um container Docker
--   Para executar seu código, deve ser preciso apenas rodar os seguintes comandos:
-    -   git clone \$seu-fork
-    -   cd \$seu-fork
-    -   comando para instalar dependências
-    -   comando para executar a aplicação
+-   Drones cannot fly outside the initially delimited area. Once they touch an edge, their only move is to rotate
+-   A photo will not be taken if the drone passes by/stays at the same point more than once
+-   It is not possible to start two drones at the same Cartesian coordinate
+-   Fork this challenge and create your project (or workspace) using your version of that repository, as soon as you finish the challenge, submit a _pull request_.
+    -   If you have any reason not to submit a _pull request_, create a private repository on Github, do every challenge on the **master** branch and don't forget to fill in the `pull-request.txt` file. As soon as you finish your development, add the user `automator-hurb` to your repository as a contributor and make it available for at least 30 days. **Do not add the `automator-hurb` until development is complete.**
+    -   If you have any problem creating the private repository, at the end of the challenge fill in the file called `pull-request.txt`, compress the project folder - including the `.git` folder - and send it to us by email.
+-   The code needs to run inside a Docker container
+-   To run your code, all you need to do is run the following commands:
+    -   git clone \$your-fork
+    -   cd \$your-fork
+    -   command to install dependencies
+    -   command to run the application
 
-## Critério de avaliação
+## Evaluation criteria
 
--   **Organização do código**: Separação de módulos, view e model, back-end e front-end
--   **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
--   **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
--   **Legibilidade do código** (incluindo comentários)
--   **Segurança**: Existe alguma vulnerabilidade clara?
--   **Cobertura de testes** (Não esperamos cobertura completa)
--   **Histórico de commits** (estrutura e qualidade)
--   **UX**: As chamadas de coordenadas para os drones são intuítivas
--   **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
+-   **Organization of code**: Separation of modules, view and model, back-end and front-end
+-   **Clarity**: Does the README explain briefly what the problem is and how can I run the application?
+-   **Assertiveness**: Is the application doing what is expected? If something is missing, does the README explain why?
+-   **Code readability** (including comments)
+-   **Security**: Are there any clear vulnerabilities?
+-   **Test coverage** (We don't expect full coverage)
+-   **History of commits** (structure and quality)
+-   **UX**: Is the interface user-friendly and self-explanatory? Is the API intuitive?
+-   **Technical choices**: Is the choice of libraries, database, architecture, etc. the best choice for the application?
 
-## Dúvidas
+## Doubts
 
-Quaisquer dúvidas que você venha a ter, consulte as [_issues_](https://github.com/HurbCom/challenge-lima/issues) para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
+Any questions you may have, check the [_issues_](https://github.com/HurbCom/challenge-lima/issues) to see if someone hasn't already and if you can't find your answer, open one yourself. new issue!
 
-Boa sorte e boa viagem! ;)
+Good luck and good trip! ;)
 
 <p align="center">
   <img src="ca.jpg" alt="Challange accepted" />
