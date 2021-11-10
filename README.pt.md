@@ -2,11 +2,11 @@
 
 [[English](README.md) | [Português](README.pt.md)]
 
-Estamos desenvolvendo um produto que basicamente usa drones para mapear uma região e tirar fotos 360º e criar um mapa de navegável, muito parecido com o Google Street View. Então o desafio é criar uma ferramenta para controlar esses drones. 🚁
+Estamos desenvolvendo um produto que basicamente usa drones para mapear uma região, tira fotos 360º e cria um mapa navegável, muito parecido com o Google Street View. Então o desafio é criar uma ferramenta para controlar esses drones. 🚁
 
-Imagine que a região aonde os drones devem sobrevoar é um plano de X por Y metros e os drones só vão se locomover dentro desse plano de metro em metro (logo eles se locomovem em um grid) e a cada ponto de parada eles vão tirar uma foto 360º.
+Imagine que a região aonde os drones devem sobrevoar é um plano de X por Y metros, e os drones só vão se locomover dentro desse plano de metro em metro (logo eles se locomovem em um grid), e a cada ponto de parada eles vão tirar uma foto 360º.
 
-Quando eles são ligados, devem receber uma cordenada cartesiana de para onde eles vão se posicionar e para qual lado do bússula a camêra deve estar apontando, por exemplo (4, 3, N) levará o drone para as coordenadas 4metros no eixo X e 3metros no eixo Y, apontando a câmera para norte. Os pontos cardeais esperados são 4: (N)orte, (S)ul, (L)este e (O)este.
+Quando eles são ligados, devem receber uma cordenada cartesiana de para onde eles vão se posicionar e para qual lado do bússula a camêra deve estar apontando. Por exemplo, (4, 3, N) levará o drone para as coordenadas 4metros no eixo X e 3metros no eixo Y, apontando a câmera para norte. Os pontos cardeais esperados são 4: (N)orte, (S)ul, (L)este e (O)este.
 
 Uma vez ligados, cada drone deverá receber uma lista de comandos, em formato de string, que deverá ser executada sequencialmente e a cada comando executado uma foto 360º é tirada automaticamente. Os comandos possíveis são: (D)ireita, (E)squerda, (F)rente. A cada vez que o drone receber um comando de "D" ou "E" ele fará um giro de 90º. Ex: "DFFEEFDFE" Nesse exemplo vão ser tiradas 5 fotos.
 
@@ -26,7 +26,7 @@ Você pode usar qualquer linguagem de programação para o desafio. Preferencial
 
 Você pode usar qualquer _framework_. Se a sua escolhar for por um _framework_ que resulte em _boilerplate code_, por favor descreva no README qual pedaço de código foi escrito por você.
 
-Pontos extras se você responder no README.md **qual é o menor número de drones para mapear completamnente um grid de 10x10 metros com o menor número de passos possíveis**!
+Pontos extras se você responder no README.md **qual é o menor número de drones para mapear completamente um grid de 10x10 metros com o menor número de passos possíveis**!
 
 ## Requisitos
 
